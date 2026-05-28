@@ -1,0 +1,24 @@
+{
+  "name": "nebulastream",
+  "version": "1.0.0",
+  "description": "A Node.js web application hosted on AWS EC2.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AkashJanawad/NebulaStream.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AkashJanawad/NebulaStream/issues"
+  },
+  "homepage": "https://github.com/AkashJanawad/NebulaStream#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
