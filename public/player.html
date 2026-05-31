@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NebulaStream | Player</title>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <style>
+        body { background: #0b0e14; color: white; font-family: sans-serif; }
+        .container { max-width: 900px; margin: 50px auto; }
+        /* Making the progress bar Red like YouTube */
+        :root { --plyr-color-main: #ff0000; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <video id="player" playsinline controls>
+            <source src="" type="video/mp4" />
+        </video>
+        <h1 id="videoTitle" style="margin-top: 20px;">Loading...</h1>
+        <hr>
+        <p>NebulaStream Original Content</p>
+    </div>
+
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+    <script>
+        // Initialize the sleek YouTube-style player
+        const player = new Plyr('#player');
+
+        // Get Video ID from URL
+        const videoId = window.location.pathname.split('/').pop();
+
+        // Fetch video details
+        fetch('/api/video/' + videoId)
+            .then(res => res.json())
+            .then(video => {
+                const source = document.querySelector('source');
+                source.src = video.videoPath;
+                document.getElementById('videoTitle').innerText = video.title;
+                player.source = {
+                    type: 'video',
+                    sources: [{ src: video.videoPath, type: 'video/mp4' }]
+                };
+            });
+    </script>
+</body>
+</html>

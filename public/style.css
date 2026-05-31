@@ -52,3 +52,28 @@ h1 span {
     cursor: pointer;
     font-weight: bold;
 }
+
+#videoGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+.video-card {
+    background: #1a1e26;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.video-card img {
+    width: 100%;
+    aspect-ratio: 3 / 4; /* Forces Portrait 3:4 Ratio */
+    object-fit: cover;   /* Sharp resolution, no stretching */
+    display: block;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 210, 255, 0.3);
+}

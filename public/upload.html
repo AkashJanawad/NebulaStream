@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NebulaStream | Upload</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background:#0b0e14; color:white; padding:50px; text-align:center;">
+    <h1>Upload New Content</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data" style="background:#1a1e26; padding:30px; border-radius:15px; display:inline-block;">
+        <input type="text" name="title" placeholder="Video Title" required style="width:90%; padding:10px; margin-bottom:10px;"><br>
+        <label>Video File (.mp4):</label><br>
+        <input type="file" name="video" accept="video/mp4" required style="margin-bottom:20px;"><br>
+        <label>Thumbnail (.jpg):</label><br>
+        <input type="file" name="thumbnail" accept="image/*" required style="margin-bottom:20px;"><br>
+        <button type="submit" class="cta-btn">Publish to Nebula</button>
+    </form>
+</body>
+</html>

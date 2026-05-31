@@ -19,6 +19,10 @@
   },
   "homepage": "https://github.com/AkashJanawad/NebulaStream#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "bcryptjs": "^3.0.3",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mongoose": "^9.6.3",
+    "multer": "^2.1.1"
   }
 }
