@@ -2,39 +2,45 @@
 <html>
 <head>
     <title>NebulaStream | Player</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="cinematic.css">
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     <style>
-        body { background: #0b0e14; color: white; font-family: sans-serif; }
-        .container { max-width: 900px; margin: 50px auto; }
-        /* Making the progress bar Red like YouTube */
-        :root { --plyr-color-main: #ff0000; }
+        :root { --plyr-color-main: #00d2ff; }
+        .plyr { border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
     </style>
-    <link rel="stylesheet" href="chatbot.css">
 </head>
 <body>
-    <div class="container">
-        <video id="player" playsinline controls>
-            <source src="" type="video/mp4" />
-        </video>
-        <h1 id="videoTitle" style="margin-top: 20px;">Loading...</h1>
-        <hr>
-        <p>NebulaStream Original Content</p>
-    </div>
+    <nav>
+        <div class="logo">NebulaStream</div>
+        <ul>
+            <li><a href="/dashboard.html">Back to Library</a></li>
+        </ul>
+    </nav>
+
+    <main class="hero" style="padding-top: 100px;">
+        <div class="container" style="max-width: 1000px; width: 90%; margin: 0 auto;">
+            <video id="player" playsinline controls>
+                <source src="" type="video/mp4" />
+            </video>
+            <div style="text-align: left; margin-top: 30px;">
+                <h1 id="videoTitle" style="font-size: 2.5rem; margin-bottom: 10px; text-align: left;">Loading...</h1>
+                <p style="color: var(--text-dim);">NebulaStream Original Production • 4K HDR</p>
+                <hr style="border: 0; border-top: 1px solid var(--glass-border); margin: 20px 0;">
+                <p style="opacity: 0.8;">Experience this content in full cinematic immersion. Use the Nebula AI chatbot for real-time insights.</p>
+            </div>
+        </div>
+    </main>
 
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
     <script>
-        // Initialize the sleek YouTube-style player
         const player = new Plyr('#player');
-
-        // Get Video ID from URL
         const videoId = window.location.pathname.split('/').pop();
 
-        // Fetch video details
         fetch('/api/video/' + videoId)
             .then(res => res.json())
             .then(video => {
-                const source = document.querySelector('source');
-                source.src = video.videoPath;
                 document.getElementById('videoTitle').innerText = video.title;
                 player.source = {
                     type: 'video',
@@ -43,5 +49,6 @@
             });
     </script>
     <script src="chatbot.js"></script>
+    <script src="cinematic.js"></script>
 </body>
 </html>

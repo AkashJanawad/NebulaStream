@@ -1,17 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NebulaStream | Login</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="cinematic.css">
 </head>
-<body style="text-align:center; padding-top:100px;">
-    <h2>Login to NebulaStream</h2>
-    <form action="/login" method="POST">
-        <input type="email" name="email" placeholder="Email" required><br><br>
-        <input type="password" name="password" placeholder="Password" required><br><br>
-        <button type="submit" class="cta-btn">Login</button>
-    </form>
+<body>
+    <nav>
+        <div class="logo">NebulaStream</div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/dashboard.html">Discover</a></li>
+        </ul>
+    </nav>
+
+    <main class="hero">
+        <div class="auth-box">
+            <h2 style="margin-bottom: 30px; font-weight: 800;">Welcome Back</h2>
+            <form action="/login" method="POST">
+                <div class="input-group">
+                    <input type="email" name="email" id="email" placeholder=" " required>
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" name="password" id="password" placeholder=" " required>
+                    <label for="password">Password</label>
+                </div>
+                <button type="submit" class="liquid-btn">Login</button>
+            </form>
+            <p class="mt-20">New here? <a href="index.html" style="color: var(--accent);">Sign Up</a></p>
+        </div>
+    </main>
+
     <script src="chatbot.js"></script>
+    <script src="cinematic.js"></script>
 </body>
 </html>

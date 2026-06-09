@@ -14,21 +14,26 @@
         </div>
         <div>
             <button id="uploadBtn" class="liquid-btn">+ Upload Video</button>
-            <a href="/logout" style="margin-left:20px; color:white; text-decoration:none; font-weight:600;">Logout</a>
+            <a href="/logout" style="margin-left:20px; color:white; text-decoration:none; font-weight:600; opacity: 0.7; transition: 0.3s;">Logout</a>
         </div>
     </nav>
 
-    <div style="padding: 50px;">
-        <h1 style="color:white;">Your Library</h1>
-        <div id="videoGrid" class="video-grid">
+    <main style="padding-top: 120px;">
+        <div style="padding: 0 5%;">
+            <h1 style="font-size: 3rem; margin-bottom: 10px;">Your <span>Nebula</span></h1>
+            <p style="color: var(--text-dim); margin-bottom: 40px;">Explore your curated collection of cinematic experiences.</p>
+            
+            <div id="videoGrid" class="video-grid">
+                <!-- Videos will be rendered here as a 3D Carousel or Grid -->
             </div>
-    </div>
+        </div>
+    </main>
 
-    <div id="adminModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:1000; justify-content:center; align-items:center;">
-        <div style="background:#1a1e26; padding:40px; border-radius:20px; text-align:center; border: 2px solid #ff0000;">
-            <h2 style="color:#ff0000;">Access Restricted</h2>
-            <p style="color:white;">Only the <b>Nebula Admin</b> can upload content.</p>
-            <button onclick="document.getElementById('adminModal').style.display='none'" class="cta-btn" style="margin-top:20px;">Back to Library</button>
+    <div id="adminModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(2,2,5,0.95); z-index:2000; justify-content:center; align-items:center; backdrop-filter: blur(20px);">
+        <div class="auth-box" style="text-align:center; border-color: #ff4b2b;">
+            <h2 style="color:#ff4b2b; margin-bottom: 15px;">Access Restricted</h2>
+            <p style="color:white; margin-bottom: 30px;">Only the <b>Nebula Admin</b> can upload content to the main stream.</p>
+            <button onclick="document.getElementById('adminModal').style.display='none'" class="liquid-btn" style="background: white; color: black;">Back to Library</button>
         </div>
     </div>
 
@@ -59,9 +64,9 @@
                 <div class="video-card">
                     <a href="/watch/${v._id}" style="text-decoration:none;">
                         <img src="${v.thumbnailPath}">
-                        <div style="padding:15px;">
-                            <h3 style="margin:0; color:white;">${v.title}</h3>
-                            <p style="color:#00d2ff;">Watch Now</p>
+                        <div style="padding:20px;">
+                            <h3 style="margin:0; color:white; font-size: 1.1rem; font-weight: 600;">${v.title}</h3>
+                            <p style="color:var(--accent); font-size: 0.85rem; margin-top: 5px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Watch Experience</p>
                         </div>
                     </a>
                 </div>

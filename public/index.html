@@ -9,32 +9,37 @@
     <link rel="stylesheet" href="cinematic.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">NebulaStream</div>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Discover</a></li>
-                <li><a href="#">Join Now</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav>
+        <div class="logo">NebulaStream</div>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/dashboard.html">Discover</a></li>
+            <li><a href="/login.html">Login</a></li>
+        </ul>
+    </nav>
 
     <main>
         <section class="hero">
-    <h1>Limitless Content. <br><span>One Nebula.</span></h1>
-    <p>Join NebulaStream today.</p>
-    
-    <div class="auth-box">
-        <form action="/signup" method="POST">
-            <input type="email" name="email" placeholder="Email Address" required>
-            <input type="password" name="password" placeholder="Create Password" required>
-            <button type="submit" class="liquid-btn">Join Now</button>
-        </form>
-        <p>Already have an account? <a href="login.html">Login</a></p>
-    </div>
-</section>
+            <h1>Limitless Content. <br><span>One Nebula.</span></h1>
+            <p>Experience the next generation of cinematic streaming with Nebula AI and 3D immersion.</p>
+            
+            <div class="auth-box">
+                <form action="/signup" method="POST">
+                    <div class="input-group">
+                        <input type="email" name="email" id="email" placeholder=" " required>
+                        <label for="email">Email Address</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" name="password" id="password" placeholder=" " required>
+                        <label for="password">Create Password</label>
+                    </div>
+                    <button type="submit" class="liquid-btn">Join the Nebula</button>
+                </form>
+                <p class="mt-20">Already in the Nebula? <a href="login.html" style="color: var(--accent);">Login</a></p>
+            </div>
+        </section>
     </main>
+
     <script src="chatbot.js"></script>
     <script src="cinematic.js"></script>
 </body>
