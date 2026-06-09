@@ -4,13 +4,17 @@
     <title>NebulaStream | Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="chatbot.css">
+    <link rel="stylesheet" href="cinematic.css">
 </head>
 <body>
     <nav>
         <div class="logo">NebulaStream</div>
+        <div style="flex: 1; margin: 0 40px; position: relative;">
+            <input type="text" id="searchInput" placeholder="Search movies..." style="width: 100%; padding: 12px 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: white; outline: none; transition: all 0.3s; backdrop-filter: blur(10px);">
+        </div>
         <div>
-            <button id="uploadBtn" style="background:#00d2ff; color:black; border:none; padding:10px 20px; border-radius:5px; font-weight:bold; cursor:pointer; margin-right:20px;">+ Upload Video</button>
-            <a href="/logout">Logout</a>
+            <button id="uploadBtn" class="liquid-btn">+ Upload Video</button>
+            <a href="/logout" style="margin-left:20px; color:white; text-decoration:none; font-weight:600;">Logout</a>
         </div>
     </nav>
 
@@ -40,23 +44,37 @@
             else document.getElementById('adminModal').style.display = 'flex';
         };
 
+        let allVideos = [];
+
         fetch('/api/videos')
             .then(res => res.json())
             .then(videos => {
-                const grid = document.getElementById('videoGrid');
-                grid.innerHTML = videos.map(v => `
-                    <div class="video-card">
-                        <a href="/watch/${v._id}" style="text-decoration:none;">
-                            <img src="${v.thumbnailPath}">
-                            <div style="padding:15px;">
-                                <h3 style="margin:0; color:white;">${v.title}</h3>
-                                <p style="color:#00d2ff;">Watch Now</p>
-                            </div>
-                        </a>
-                    </div>
-                `).join('');
+                allVideos = videos;
+                renderVideos(videos);
             });
+
+        function renderVideos(videos) {
+            const grid = document.getElementById('videoGrid');
+            grid.innerHTML = videos.map(v => `
+                <div class="video-card">
+                    <a href="/watch/${v._id}" style="text-decoration:none;">
+                        <img src="${v.thumbnailPath}">
+                        <div style="padding:15px;">
+                            <h3 style="margin:0; color:white;">${v.title}</h3>
+                            <p style="color:#00d2ff;">Watch Now</p>
+                        </div>
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        document.getElementById('searchInput').oninput = function(e) {
+            const term = e.target.value.toLowerCase();
+            const filtered = allVideos.filter(v => v.title.toLowerCase().includes(term));
+            renderVideos(filtered);
+        };
     </script>
     <script src="chatbot.js"></script>
+    <script src="cinematic.js"></script>
 </body>
 </html>
