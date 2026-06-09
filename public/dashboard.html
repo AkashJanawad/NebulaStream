@@ -5,35 +5,128 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="chatbot.css">
     <link rel="stylesheet" href="cinematic.css">
+    <style>
+        .genre-chips {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        .chip {
+            padding: 10px 25px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            white-space: nowrap;
+            transition: 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        .chip.active {
+            background: var(--accent);
+            color: black;
+            border-color: var(--accent);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+        .chip:hover:not(.active) {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--accent);
+        }
+        .user-profile {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent) 0%, #3a47d5 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 800;
+            color: white;
+            cursor: pointer;
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: 0.3s;
+        }
+        .user-profile:hover {
+            transform: scale(1.1);
+            border-color: var(--accent);
+        }
+    </style>
 </head>
 <body>
     <nav>
         <div class="logo">NebulaStream</div>
         <div style="flex: 1; margin: 0 40px; position: relative;">
-            <input type="text" id="searchInput" placeholder="Search movies..." style="width: 100%; padding: 12px 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: white; outline: none; transition: all 0.3s; backdrop-filter: blur(10px);">
+            <input type="text" id="searchInput" placeholder="Search the Nebula..." style="width: 100%; padding: 12px 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: white; outline: none; transition: all 0.3s; backdrop-filter: blur(10px);">
         </div>
-        <div>
-            <button id="uploadBtn" class="liquid-btn">+ Upload Video</button>
-            <a href="/logout" style="margin-left:20px; color:white; text-decoration:none; font-weight:600; opacity: 0.7; transition: 0.3s;">Logout</a>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <button id="uploadBtn" class="liquid-btn">+ Upload</button>
+            <div class="user-profile">A</div>
+            <a href="/logout" style="color:white; text-decoration:none; font-weight:600; opacity: 0.5; transition: 0.3s; font-size: 0.8rem;">Logout</a>
         </div>
     </nav>
 
-    <main style="padding-top: 120px;">
+    <main style="padding-top: 140px; padding-bottom: 100px;">
         <div style="padding: 0 5%;">
-            <h1 style="font-size: 3rem; margin-bottom: 10px;">Your <span>Nebula</span></h1>
-            <p style="color: var(--text-dim); margin-bottom: 40px;">Explore your curated collection of cinematic experiences.</p>
+            <h1 style="font-size: 4rem; margin-bottom: 10px; line-height: 1;">Explore <span>Nebula</span></h1>
+            <p style="color: var(--text-dim); margin-bottom: 40px; font-size: 1.1rem;">Discover the most cinematic stories across the universe.</p>
             
+            <div class="genre-chips">
+                <div class="chip active">All Content</div>
+                <div class="chip">Sci-Fi</div>
+                <div class="chip">Action</div>
+                <div class="chip">Drama</div>
+                <div class="chip">Nebula Originals</div>
+                <div class="chip">Trending</div>
+            </div>
+
             <div id="videoGrid" class="video-grid">
-                <!-- Videos will be rendered here as a 3D Carousel or Grid -->
+                <!-- Videos will be rendered here -->
             </div>
         </div>
     </main>
 
+    <footer style="padding: 100px 5%; background: rgba(0,0,0,0.8); border-top: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(20px);">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 50px; margin-bottom: 50px;">
+            <div>
+                <div class="logo" style="margin-bottom: 20px;">NebulaStream</div>
+                <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.8;">
+                    The next generation of cinematic streaming. Powered by AI, designed for immersion.
+                </p>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 20px;">Explore</h4>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+                    <li><a href="#" style="color: var(--text-dim); text-decoration: none;">Movies</a></li>
+                    <li><a href="#" style="color: var(--text-dim); text-decoration: none;">Originals</a></li>
+                    <li><a href="#" style="color: var(--text-dim); text-decoration: none;">Trending</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="margin-bottom: 20px;">Company</h4>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+                    <li><a href="#" style="color: var(--text-dim); text-decoration: none;">About</a></li>
+                    <li><a href="#" style="color: var(--text-dim); text-decoration: none;">Careers</a></li>
+                    <li><a href="#" style="color: var(--text-dim); text-decoration: none;">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin-bottom: 40px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; color: var(--text-dim); font-size: 0.8rem;">
+            <p>&copy; 2026 NebulaStream Cinematic. All Rights Reserved.</p>
+            <div style="display: flex; gap: 20px;">
+                <a href="#" style="color: var(--text-dim); text-decoration: none;">Terms of Service</a>
+                <a href="#" style="color: var(--text-dim); text-decoration: none;">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
     <div id="adminModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(2,2,5,0.95); z-index:2000; justify-content:center; align-items:center; backdrop-filter: blur(20px);">
-        <div class="auth-box" style="text-align:center; border-color: #ff4b2b;">
-            <h2 style="color:#ff4b2b; margin-bottom: 15px;">Access Restricted</h2>
-            <p style="color:white; margin-bottom: 30px;">Only the <b>Nebula Admin</b> can upload content to the main stream.</p>
-            <button onclick="document.getElementById('adminModal').style.display='none'" class="liquid-btn" style="background: white; color: black;">Back to Library</button>
+        <div class="auth-box" style="text-align:center; border-color: #ff4b2b; max-width: 400px;">
+            <h2 style="color:#ff4b2b; margin-bottom: 15px; font-weight: 800;">Restricted</h2>
+            <p style="color:white; margin-bottom: 30px; opacity: 0.8;">Only the <b>Nebula Admin</b> can publish content to this stream.</p>
+            <button onclick="document.getElementById('adminModal').style.display='none'" class="liquid-btn" style="background: white; color: black; width: 100%;">Return to Stream</button>
         </div>
     </div>
 
@@ -63,10 +156,18 @@
             grid.innerHTML = videos.map(v => `
                 <div class="video-card">
                     <a href="/watch/${v._id}" style="text-decoration:none;">
-                        <img src="${v.thumbnailPath}">
-                        <div style="padding:20px;">
-                            <h3 style="margin:0; color:white; font-size: 1.1rem; font-weight: 600;">${v.title}</h3>
-                            <p style="color:var(--accent); font-size: 0.85rem; margin-top: 5px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Watch Experience</p>
+                        <div style="position: relative; overflow: hidden;">
+                            <img src="${v.thumbnailPath}">
+                            <div style="position: absolute; top: 10px; right: 10px; padding: 4px 8px; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); border-radius: 4px; font-size: 0.6rem; font-weight: 800; color: var(--accent); border: 1px solid rgba(0, 210, 255, 0.3);">4K</div>
+                        </div>
+                        <div style="padding:25px;">
+                            <h3 style="margin:0; color:white; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">${v.title}</h3>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <p style="color:var(--accent); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;">Watch Now</p>
+                                <div style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--accent); display: flex; justify-content: center; align-items: center;">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--accent)"><path d="M8 5v14l11-7z"></path></svg>
+                                </div>
+                            </div>
                         </div>
                     </a>
                 </div>
@@ -78,6 +179,15 @@
             const filtered = allVideos.filter(v => v.title.toLowerCase().includes(term));
             renderVideos(filtered);
         };
+
+        // Chips interaction
+        document.querySelectorAll('.chip').forEach(chip => {
+            chip.onclick = function() {
+                document.querySelector('.chip.active').classList.remove('active');
+                this.classList.add('active');
+                // In a real app, this would filter by category
+            }
+        });
     </script>
     <script src="chatbot.js"></script>
     <script src="cinematic.js"></script>

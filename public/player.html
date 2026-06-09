@@ -8,30 +8,68 @@
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     <style>
         :root { --plyr-color-main: #00d2ff; }
-        .plyr { border-radius: 20px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .plyr { border-radius: 24px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.05); }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50px;
+            transition: 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        .back-btn:hover { background: rgba(255,255,255,0.1); transform: translateX(-5px); border-color: var(--accent); }
     </style>
 </head>
 <body>
     <nav>
         <div class="logo">NebulaStream</div>
         <ul>
-            <li><a href="/dashboard.html">Back to Library</a></li>
+            <li><a href="/dashboard.html" class="back-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Back to Library
+            </a></li>
         </ul>
     </nav>
 
-    <main class="hero" style="padding-top: 100px;">
-        <div class="container" style="max-width: 1000px; width: 90%; margin: 0 auto;">
+    <main class="hero" style="padding-top: 120px; height: auto; min-height: 100vh;">
+        <div class="container" style="max-width: 1100px; width: 90%; margin: 0 auto; padding-bottom: 100px;">
             <video id="player" playsinline controls>
                 <source src="" type="video/mp4" />
             </video>
-            <div style="text-align: left; margin-top: 30px;">
-                <h1 id="videoTitle" style="font-size: 2.5rem; margin-bottom: 10px; text-align: left;">Loading...</h1>
-                <p style="color: var(--text-dim);">NebulaStream Original Production • 4K HDR</p>
-                <hr style="border: 0; border-top: 1px solid var(--glass-border); margin: 20px 0;">
-                <p style="opacity: 0.8;">Experience this content in full cinematic immersion. Use the Nebula AI chatbot for real-time insights.</p>
+            
+            <div style="text-align: left; margin-top: 40px; background: rgba(255,255,255,0.03); padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(20px);">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
+                    <div>
+                        <h1 id="videoTitle" style="font-size: 3.5rem; margin-bottom: 10px; text-align: left; line-height: 1.1;">Loading...</h1>
+                        <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                            <span style="padding: 4px 12px; background: rgba(0, 210, 255, 0.1); color: var(--accent); border-radius: 6px; font-weight: 700; font-size: 0.8rem; letter-spacing: 1px;">4K ULTRA HD</span>
+                            <span style="padding: 4px 12px; background: rgba(255, 255, 255, 0.05); color: white; border-radius: 6px; font-weight: 700; font-size: 0.8rem; letter-spacing: 1px;">DOLBY VISION</span>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <span style="font-size: 1.5rem; font-weight: 800; color: var(--accent); opacity: 0.5;">NEBULA</span>
+                        <p style="font-size: 0.8rem; color: var(--text-dim);">Original Production</p>
+                    </div>
+                </div>
+                
+                <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 30px 0;">
+                <p style="font-size: 1.1rem; opacity: 0.8; max-width: 800px; color: var(--text-dim); line-height: 1.6;">
+                    You are currently watching a NebulaStream original production. This content is optimized for your display with high dynamic range and immersive spatial audio. Use the Nebula AI chatbot to ask about characters, plot, or recommendations.
+                </p>
             </div>
         </div>
     </main>
+
+    <footer style="padding: 60px 5%; background: rgba(0,0,0,0.5); border-top: 1px solid rgba(255,255,255,0.05); text-align: center; backdrop-filter: blur(20px);">
+        <div class="logo" style="margin-bottom: 20px; font-size: 1.5rem;">NebulaStream</div>
+        <p style="color: var(--text-dim); font-size: 0.9rem;">&copy; 2026 NebulaStream Cinematic Universe. All Rights Reserved.</p>
+    </footer>
 
     <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
     <script>
