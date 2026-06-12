@@ -69,18 +69,9 @@
 
     <main style="padding-top: 140px; padding-bottom: 100px;">
         <div style="padding: 0 5%;">
-            <h1 style="font-size: 4rem; margin-bottom: 10px; line-height: 1;">Explore <span>Nebula</span></h1>
+            <h1 id="exploreTitle" style="font-size: 4rem; margin-bottom: 10px; line-height: 1;">Explore <span>Nebula</span></h1>
             <p style="color: var(--text-dim); margin-bottom: 40px; font-size: 1.1rem;">Discover the most cinematic stories across the universe.</p>
             
-            <div class="genre-chips">
-                <div class="chip active">All Content</div>
-                <div class="chip">Sci-Fi</div>
-                <div class="chip">Action</div>
-                <div class="chip">Drama</div>
-                <div class="chip">Nebula Originals</div>
-                <div class="chip">Trending</div>
-            </div>
-
             <div id="videoGrid" class="video-grid">
                 <!-- Videos will be rendered here -->
             </div>
@@ -98,17 +89,17 @@
             <div>
                 <h4 style="margin-bottom: 20px;">Explore</h4>
                 <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
-                    <li><a href="#" style="color: var(--text-dim); text-decoration: none;">Movies</a></li>
-                    <li><a href="#" style="color: var(--text-dim); text-decoration: none;">Originals</a></li>
-                    <li><a href="#" style="color: var(--text-dim); text-decoration: none;">Trending</a></li>
+                    <li><a href="#" onclick="filterVideos('Movies')" class="footer-link">Movies</a></li>
+                    <li><a href="#" onclick="filterVideos('Originals')" class="footer-link">Originals</a></li>
+                    <li><a href="#" onclick="filterVideos('Trending')" class="footer-link">Trending</a></li>
                 </ul>
             </div>
             <div>
                 <h4 style="margin-bottom: 20px;">Company</h4>
                 <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
-                    <li><a href="#" style="color: var(--text-dim); text-decoration: none;">About</a></li>
-                    <li><a href="#" style="color: var(--text-dim); text-decoration: none;">Careers</a></li>
-                    <li><a href="#" style="color: var(--text-dim); text-decoration: none;">Contact</a></li>
+                    <li><a href="#" onclick="showInfo('About')" class="footer-link">About</a></li>
+                    <li><a href="#" onclick="showInfo('Careers')" class="footer-link">Careers</a></li>
+                    <li><a href="#" onclick="showInfo('Contact')" class="footer-link">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -116,8 +107,8 @@
         <div style="display: flex; justify-content: space-between; align-items: center; color: var(--text-dim); font-size: 0.8rem;">
             <p>&copy; 2026 NebulaStream Cinematic. All Rights Reserved.</p>
             <div style="display: flex; gap: 20px;">
-                <a href="#" style="color: var(--text-dim); text-decoration: none;">Terms of Service</a>
-                <a href="#" style="color: var(--text-dim); text-decoration: none;">Privacy Policy</a>
+                <a href="#" class="footer-link" style="font-size: 0.8rem;">Terms of Service</a>
+                <a href="#" class="footer-link" style="font-size: 0.8rem;">Privacy Policy</a>
             </div>
         </div>
     </footer>
@@ -129,6 +120,34 @@
             <button onclick="document.getElementById('adminModal').style.display='none'" class="liquid-btn" style="background: white; color: black; width: 100%;">Return to Stream</button>
         </div>
     </div>
+
+    <div id="infoModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(2,2,5,0.95); z-index:2000; justify-content:center; align-items:center; backdrop-filter: blur(20px);">
+        <div class="auth-box" style="text-align:center; max-width: 500px; border-color: var(--accent);">
+            <h2 id="infoTitle" style="color:var(--accent); margin-bottom: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;"></h2>
+            <div id="infoContent" style="color:white; margin-bottom: 30px; opacity: 0.9; line-height: 1.8; font-size: 1.1rem;"></div>
+            <button onclick="document.getElementById('infoModal').style.display='none'" class="liquid-btn" style="background: var(--accent); color: black; width: 100%;">Close</button>
+        </div>
+    </div>
+
+    <style>
+        .footer-link {
+            color: var(--text-dim) !important;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
+        }
+        .footer-link:hover {
+            color: var(--accent) !important;
+            transform: translateX(10px);
+        }
+        #infoModal {
+            animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
 
     <script>
         let userStatus = { isAdmin: false };
@@ -153,25 +172,30 @@
 
         function renderVideos(videos) {
             const grid = document.getElementById('videoGrid');
-            grid.innerHTML = videos.map(v => `
-                <div class="video-card">
-                    <a href="/watch/${v._id}" style="text-decoration:none;">
-                        <div style="position: relative; overflow: hidden;">
-                            <img src="${v.thumbnailPath}">
-                            <div style="position: absolute; top: 10px; right: 10px; padding: 4px 8px; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); border-radius: 4px; font-size: 0.6rem; font-weight: 800; color: var(--accent); border: 1px solid rgba(0, 210, 255, 0.3);">4K</div>
-                        </div>
-                        <div style="padding:25px;">
-                            <h3 style="margin:0; color:white; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">${v.title}</h3>
-                            <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <p style="color:var(--accent); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;">Watch Now</p>
-                                <div style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--accent); display: flex; justify-content: center; align-items: center;">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--accent)"><path d="M8 5v14l11-7z"></path></svg>
+            grid.style.opacity = '0';
+            setTimeout(() => {
+                grid.innerHTML = videos.map(v => `
+                    <div class="video-card">
+                        <a href="/watch/${v._id}" style="text-decoration:none;">
+                            <div style="position: relative; overflow: hidden;">
+                                <img src="${v.thumbnailPath}">
+                                <div style="position: absolute; top: 10px; right: 10px; padding: 4px 8px; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); border-radius: 4px; font-size: 0.6rem; font-weight: 800; color: var(--accent); border: 1px solid rgba(0, 210, 255, 0.3);">4K</div>
+                            </div>
+                            <div style="padding:25px;">
+                                <h3 style="margin:0; color:white; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">${v.title}</h3>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <p style="color:var(--accent); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;">Watch Now</p>
+                                    <div style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--accent); display: flex; justify-content: center; align-items: center;">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--accent)"><path d="M8 5v14l11-7z"></path></svg>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
-            `).join('');
+                        </a>
+                    </div>
+                `).join('');
+                grid.style.opacity = '1';
+                grid.style.transition = 'opacity 0.5s ease';
+            }, 300);
         }
 
         document.getElementById('searchInput').oninput = function(e) {
@@ -180,14 +204,33 @@
             renderVideos(filtered);
         };
 
-        // Chips interaction
-        document.querySelectorAll('.chip').forEach(chip => {
-            chip.onclick = function() {
-                document.querySelector('.chip.active').classList.remove('active');
-                this.classList.add('active');
-                // In a real app, this would filter by category
+        function filterVideos(type) {
+            document.getElementById('exploreTitle').innerHTML = `Nebula <span>${type}</span>`;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // In a real app, this would filter by category. Here we just show a smooth reload.
+            renderVideos(allVideos);
+        }
+
+        function showInfo(type) {
+            const modal = document.getElementById('infoModal');
+            const title = document.getElementById('infoTitle');
+            const content = document.getElementById('infoContent');
+            
+            modal.style.display = 'flex';
+            title.innerText = type;
+            
+            if(type === 'About') {
+                content.innerHTML = "NebulaStream is the world's first AI-powered cinematic streaming platform. We deliver ultra-high-definition content with immersive spatial audio and real-time AI character interaction. Our mission is to redefine how you experience stories.";
+            } else if(type === 'Careers') {
+                content.innerHTML = "Join the future of entertainment. We are looking for visionary engineers, designers, and storytellers to build the next generation of the Nebula. <br><br><b>Open Roles:</b><br>• Senior AI Engineer<br>• UX/UI Immersive Designer<br>• Content Curation Specialist";
+            } else if(type === 'Contact') {
+                content.innerHTML = `Get in touch with the Nebula team. We are here to help you navigate the universe. <br><br>
+                                    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px solid var(--glass-border); text-align: left;">
+                                        <b>Phone:</b> <a href="tel:7624927665" style="color: var(--accent); text-decoration: none;">7624927665</a><br>
+                                        <b>Email:</b> <a href="mailto:hemanand4t@gmail.com" style="color: var(--accent); text-decoration: none;">hemanand4t@gmail.com</a>
+                                    </div>`;
             }
-        });
+        }
     </script>
     <script src="chatbot.js"></script>
     <script src="cinematic.js"></script>
